@@ -11,7 +11,7 @@ author: danimir
 ms.author: danil
 ms.reviewer: jrasnik, carlrab
 manager: craigg
-ms.date: 03/06/2019
+ms.date: 03/12/2019
 ---
 
 # Azure SQL Database metrics and diagnostics logging
@@ -66,7 +66,7 @@ You can set up Azure SQL databases, and instance databases to collect the follow
 | [Blocks](#blockings-dataset): Contains information about blocking events on the database. | Yes | No |
 | [SQLInsights](#intelligent-insights-dataset): Contains Intelligent Insights into performance. To learn more, see [Intelligent Insights](sql-database-intelligent-insights.md). | Yes | Yes |
 
-> [!NOTE]
+> [!IMPORTANT]
 > Elastic pools and managed instances have its own separate diagnostics telemetry from databases they contain. This is important to note as diagnostics telemetry is configured separately for each of these resources, as documented below.
 
 ## Azure portal
@@ -99,10 +99,10 @@ To enable streaming of diagnostics telemetry for an elastic pool resource, follo
 
    ![Configure diagnostics for elastic pools](./media/sql-database-metrics-diag-logging/diagnostics-settings-container-elasticpool-selection.png)
 
-> [!NOTE]
+> [!IMPORTANT]
 > In addition to configuring diagnostics telemetry for an elastic pool, you also need configure diagnostics telemetry for each database in elastic pool, as documented below. 
 
-### Configure streaming of diagnostics telemetry for single datatbase, or database in elastic pool
+### Configure streaming of diagnostics telemetry for single database, or database in elastic pool
 
    ![SQL Database icon](./media/sql-database-metrics-diag-logging/icon-sql-database-text.png)
 
@@ -136,7 +136,7 @@ You can set up a managed instance resource to collect the following diagnostics 
 
 | Resource | Monitoring telemetry |
 | :------------------- | ------------------- |
-| **Managed instance** | [ResourceUsageStats](#logs-for-managed-instances) contains vCores count, average CPU percentage, IO requests, bytes read/written, reserved storage space, and used storage space. |
+| **Managed instance** | ResourceUsageStats contains vCores count, average CPU percentage, IO requests, bytes read/written, reserved storage space, and used storage space. |
 
 To enable streaming of diagnostics telemetry for a managed instance resource, follow these steps:
 
@@ -154,7 +154,7 @@ To enable streaming of diagnostics telemetry for a managed instance resource, fo
 
    ![Configure diagnostics for managed instance](./media/sql-database-metrics-diag-logging/diagnostics-settings-container-mi-selection.png)
 
-> [!NOTE]
+> [!IMPORTANT]
 > In addition to configuring diagnostics telemetry for a managed instance, you also need to configure diagnostics telemetry for each instance database, as documented below. 
 
 ### Configure streaming of diagnostics telemetry for instance databases
@@ -184,6 +184,8 @@ To enable streaming of diagnostics telemetry for instance databases, follow thes
 ### PowerShell
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+> [!IMPORTANT]
+> The PowerShell Azure Resource Manager module is still supported by Azure SQL Database, but all future development is for the Az.Sql module. For these cmdlets, see [AzureRM.Sql](https://docs.microsoft.com/powershell/module/AzureRM.Sql/). The arguments for the commands in the Az module and in the AzureRm modules are substantially identical.
 
 You can enable metrics and diagnostics logging by using PowerShell.
 
@@ -399,11 +401,11 @@ Refer to the following tables for details about all metrics by resource.
 |---|---|
 |Azure SQL database|DTU percentage, DTU used, DTU limit, CPU percentage, physical data read percentage, log write percentage, Successful/Failed/Blocked by firewall connections, sessions percentage, workers percentage, storage, storage percentage, XTP storage percentage, and deadlocks |
 
-## Logs for managed instances
+## All logs
 
-Refer to the following table for details about logs for managed instances.
+Details of telemetry available for all logs are disclosed in tables below. Please see [supported diagnostic logging](#supported-diagnostic-logging-for-azure-sql-databases-and-instance-databases) to understand which logs are supported for a particular database flavor - Azure SQL single, pooled, or instance database.
 
-### Resource usage statistics
+### Resource usage stats for managed instance
 
 |Property|Description|
 |---|---|
@@ -427,10 +429,6 @@ Refer to the following table for details about logs for managed instances.
 |io_requests_s|IOPS count |
 |io_bytes_read_s|IOPS bytes read |
 |io_bytes_written_s|IOPS bytes written |
-
-## Logs for single, pooled, and instance databases
-
-Refer to the following tables for details about logs for Azure SQL single, pooled, and instance databases.
 
 ### Query Store runtime statistics
 
